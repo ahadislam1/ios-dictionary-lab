@@ -6,28 +6,64 @@ Fork and clone this repo. On your fork, answer and commit the follow questions. 
 ## Question 1
 
 - Create an instance of a dictionary called `citiesDict` that maps 3 countries to their capital cities.
-
+```swift
+var citiesDict = ["USA" : "Washington, D.C.", "Spain" : "Madrid", "Ukraine" : "Kyiv"]
+```
 - Add two more countries to your dictionary.
-
+```swift
+citiesDict["Colombia"] = "Bogota"
+citiesDict["Ecuador"] = "Quito"
+```
 - Translate at least 3 of the capital names into another language.
-
+```swift
+citiesDict["Spain"] = "España"
+citiesDict["Ecuador"] = "Bogotá"
+citiesDict["Ukraine"] = "Київ"
+```
 
 ## Question 2
 
 `var someDict:[String:Int] = ["One": 1, "Two": 4, "Three": 9, "Four": 16, "Five": 25]`
 
 - Using `someDict`, add together the values associated with "Three" and "Five" and print the result.
-
+```swift
+print(someDict["Three"]! + someDict["Five"]!)
+```
 - Add values to the dictionary for the keys "Six" and "Seven".
-
+```swift
+someDict["Six"] = 36
+someDict["Seven"] = 49
+```
 - Make a key called `productUpToSeven` and set its value equal to the product of all the values.
-
+```swift
+var product = 1
+for values in someDict.values {
+    product *= values
+}
+someDict["productUpToSeven"] = product
+print(product)
+```
 - Make a key called `sumUpToSix` and set its value equal to the sum of the keys "One", "Two", "Three", "Four", "Five" and "Six".
-
+```swift
+var sum = 0
+for k in someDict.keys {
+    if k != "productUpToSeven" && k != "Seven" {
+        sum += someDict[k]!
+    }
+}
+someDict["sumUpToSix"] = sum
+```
 - Remove the new keys made in the previous two steps
-
+```swift
+someDict["sumUpToSix"] = nil
+someDict.removeValue(forKey: "productUpToSeven")
+```
 - Add 2 to every value inside of `someDict`.
-
+```swift
+for k in someDict.keys {
+    someDict[k]! += 2
+}
+```
 
 ## Question 3
 
@@ -44,12 +80,27 @@ Create a variable that is explicitly typed as a dictionary that maps strings to 
 Using the dictionary created in the previous problem, do the following:
 
 - Print out the floating-point score for “John Steinbeck”.
-
+```swift
+print(authorRatings["John Steinbeck"]!)
+```
 - Add an additional author named “Erik Larson” with an assigned score of 9.2.
-
+```swift
+authorRatings.updateValue(9.2, forKey: "Erik Larson")
+```
 - Write an if/else statement that compares the score of John Krakaur with Mark Twain. Print out the name of the author with the highest score.
-
+```swift
+if authorScores["Jon Krakauer"]! > authorScores["Mark Twain"]! {
+    print("Jon Krakauer")
+} else {
+    print("Mark Twain")
+}
+```
 - Use a for-loop to iterate through the dictionary you created at the beginning of the problem, and print out the content in the form of key: value, one entry per line.
+```swift
+for (x, y) in authorScores {
+    print("\(x) : \(y)")
+}
+```
 
 
 ## Question 4
@@ -84,14 +135,40 @@ var code = [
     "x" : "y",
     "y" : "z",
     "z" : "a"
-]
 
 var message = "hello world"
 ```
-
+answer:
+```swift
+var message = "hello world"
+var codedmessage = ""
+for char in message {
+    if char == " " {
+        codedmessage += " "
+    } else {
+        codedmessage += code[String(char)]!
+    }
+}
+print(codedmessage)
+```
 You are also given an `encodedMessage` which contains only lowercase letters and spaces. Use the `code` dictionary to decode the message and print it.
 `var encodedMessage = "uijt nfttbhf jt ibse up sfbe"`
+```answer
+var codeMirror = [(String,String)]()
+for (x , y) in code {
+    codeMirror.append((y, x))
+}
 
+var codeMirrorDictionary = Dictionary(uniqueKeysWithValues: codeMirror)
+for char in encodedMessage {
+    if char == " " {
+        decodedMessage += " "
+    } else {
+        decodedMessage += codeMirrorDictionary[String(char)]!
+    }
+}
+print(decodedMessage)
+```
 
 ## Question 5
 
